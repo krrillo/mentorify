@@ -1,0 +1,44 @@
+---
+description: Rules for maintaining Memory Bank documentation consistency
+alwaysApply: true
+globs:
+  - "memory-bank/**/*.md"
+---
+
+# 🧠 Memory Bank Rules
+
+## 📌 Purpose
+Ensure that all key project documents inside `/memory-bank` stay up-to-date and consistent with ongoing code and architectural changes.
+
+## 🧩 Behavior
+- When any major **backend**, **frontend**, or **AI logic** file is updated, propose a corresponding edit in the relevant memory-bank document.
+- When the developer makes significant architectural or design changes, automatically suggest updates to:
+  - `01-architecture.md`
+  - `02-components.md`
+  - `07-decisions.md`
+
+## ✍️ Update Workflow
+- Use clear section headers (`##`) for each addition.
+- When a commit modifies multiple modules, summarize the relationship changes in **03-development-process.md**.
+- For every new API route or AI integration:
+  - Add it to **04-api-documentation.md**.
+  - Update examples if payload or response formats change.
+- When new AI tools, models, or prompts are introduced:
+  - Document usage in **06-ai-usage.md** with “Before/After” examples.
+
+## 🧱 Format Consistency
+- Always use `###` for subsections and `**bold**` for field names.
+- Include code snippets inside triple backticks (```) with explicit language markers (json, ts, py).
+- Maintain chronological order in `05-progress-log.md`.
+
+## 🧑‍💻 Human Oversight
+- The AI assistant must **never overwrite existing sections** automatically.
+- Instead, propose edits as appended suggestions with the tag:
+<!-- 🧠 Suggested update by Cursor AI -->
+- The developer will manually review and accept these updates.
+
+## ✅ Validation
+- Before final commits, verify:
+- All referenced files exist.
+- Links between architecture diagrams, APIs, and components are consistent.
+- No placeholder text remains (“TBD”, “TODO”, etc.).

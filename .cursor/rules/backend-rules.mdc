@@ -1,0 +1,80 @@
+---
+description: Backend development rules for Mentorify (Node.js / FastAPI)
+alwaysApply: false
+globs:
+  - "backend/**/*.{ts,js}"
+  - "src/backend/**/*.{ts,js}"
+---
+
+# Backend - Rules
+
+- Use **Express (Node.js)** or **FastAPI (Python)** for the core REST endpoints.  
+- Place all AI-related endpoints under `/api/ai/*`, for example:  
+  - `/api/ai/speech`  
+  - `/api/ai/transcribe`  
+
+## 🧠 AI Metadata Logging
+For every AI call, log the following metadata:  
+- `sessionId`  
+- `inputLanguage`  
+- `outputLanguage`  
+- `modelName`  
+- `tokensUsed`  
+- `timestamp`  
+
+## 🔐 Security & Configuration
+- Never expose API keys in code.  
+- Always read credentials from environment variables (`process.env.OPENAI_API_KEY`).  
+- Store secrets in `.env` or a secret manager (GitHub Secrets, Doppler, etc.).  
+
+## 🗄️ Database
+- Use **PostgreSQL** with **Prisma ORM** (Node) or **SQLAlchemy** (Python).  
+- Avoid raw SQL unless justified, and document the reason clearly.
+
+
+## 🤖 AI Integrations
+- The `/ai/` folder must contain integrations for:  
+  - **Speech-to-Speech**  
+  - **Whisper Turbo**  
+  - **GPT-4o**  
+- Each service must include **unit tests**.  
+- Every endpoint must include at least one **integration test**.  
+
+## ⚠️ Error Handling
+Provide clear, structured error responses to the frontend in JSON format:  
+```json
+{
+  "status": "error",
+  "message": "Invalid request",
+  "details": "Missing sessionId"
+}
+
+📋 Logging
+
+Use structured logging (e.g., Winston or Pino) for all AI calls and user sessions.
+
+🌐 Multi-language Support
+
+Support multi-language sessions.
+
+Store language preferences and adapt AI feedback accordingly.
+
+🧩 Validation
+
+Implement input validation at the controller level using:
+zod
+class-validator
+pydantic (for Python)
+
+🔁 API Response Standards
+
+Return consistent HTTP codes:
+2xx for success
+4xx for client errors
+5xx for server errors
+
+📊 Monitoring
+
+Implement performance metrics and monitoring using:
+Prometheus
+OpenTelemetry

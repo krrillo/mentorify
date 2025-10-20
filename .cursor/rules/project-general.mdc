@@ -1,0 +1,105 @@
+---
+description: General project-wide rules for Mentorify (AI-assisted bilingual speech therapy app)
+alwaysApply: true
+---
+
+# 🌍 Project General Rules
+
+## 🧩 Overview
+These rules define the global conventions for **Mentorify**, ensuring consistent development, documentation, and AI collaboration across frontend, backend, and the memory-bank.
+
+## 🧠 AI Collaboration
+- Use AI tools (OpenAI GPT-4o, Whisper Turbo, etc.) for:
+  - Code generation and refactoring.
+  - Speech-to-speech and transcription features.
+  - Automatic documentation updates within the `memory-bank/` folder.
+- Always include human review before merging AI-generated changes.
+- All commits that include AI-generated code or documentation must mention:
+[AI-Assisted Commit] <short summary>
+
+## 🧱 Architecture Standards
+- Stack:
+- **Frontend:** React / Next.js (TypeScript)
+- **Backend:** Node.js + Express (TypeScript)
+- **Database:** PostgreSQL + Prisma ORM
+- **AI Services:** OpenAI Speech-to-Speech + Whisper Turbo
+- Environments:
+- `.env` must contain all API keys and runtime variables.
+- Never expose keys or credentials in source files.
+
+## 🧩 Code Organization
+Follow a modular folder structure:
+frontend/
+backend/
+memory-bank/
+tests/
+
+Each module must contain:
+- `services/`: business logic  
+- `controllers/`: endpoint handlers  
+- `utils/`: helpers and validation  
+
+## 🧪 Testing
+- Use **Jest** for backend and **Playwright** for frontend E2E tests.
+- Include at least one full **E2E test** that covers the user flow:
+  `register → avatar session → speech → feedback`.
+- Test files go inside `/tests` with mirror structure to the source tree.
+
+## 📄 Documentation and Memory Bank
+- The `/memory-bank` folder is the single source of truth for all documentation.
+- It must always include:
+  - `00-project-overview.md`
+  - `01-architecture.md`
+  - `02-components.md`
+  - `03-development-process.md`
+  - `04-api-documentation.md`
+  - `05-progress-log.md`
+  - `06-ai-usage.md`
+  - `07-decisions.md`
+- Each document must remain synchronized with project changes.
+- Cursor should automatically suggest updates when code, endpoints, or AI integrations change.
+- Example:
+<!-- 🧠 Suggested update by Cursor AI -->
+
+Added new /api/ai/translate endpoint in 04-api-documentation.md
+
+## 🔄 Update Policy
+- When files under `/frontend`, `/backend`, or `/ai` are modified:
+- Update or suggest edits in `memory-bank` docs automatically.
+- Maintain chronological logs in `05-progress-log.md`.
+- When new models, prompts, or voice features are added:
+- Update `06-ai-usage.md` and `07-decisions.md`.
+
+## 💬 Language Policy
+- **English** for code, commit messages, and technical docs.
+- **Spanish** for UX copy, content for children, and contextual notes.
+- Documentation should clearly indicate which parts are multilingual.
+
+## 🧰 DevOps & Deployment
+- Use CI/CD (GitHub Actions or similar) to deploy to staging and production.
+- Run tests automatically before merging pull requests.
+- Maintain a `.env.example` file with placeholders for environment variables.
+
+## 🧑‍💻 Collaboration Workflow
+- Always use branches named:
+feature/<feature-name>
+fix/<issue-name>
+finalproject-<initials>
+
+- PRs must contain:
+- Linked issue or task reference.
+- Short summary of changes.
+- Mention of affected memory-bank docs if relevant.
+- Example:
+Updated /api/ai/transcribe logic + documented in 04-api-documentation.md
+
+## 🧩 Compliance
+- Ensure all handling of user audio or voice data adheres to:
+- GDPR and COPPA guidelines (especially for children’s data).
+- Local privacy regulations for bilingual datasets.
+
+## 🧠 Review Protocol
+- Every major refactor or new AI integration must include:
+- Human code review
+- Updated documentation in memory-bank
+- Testing proof (Jest or Playwright)

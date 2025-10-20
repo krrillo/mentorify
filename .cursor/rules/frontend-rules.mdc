@@ -1,0 +1,140 @@
+---
+description: Frontend development rules for Mentorify Kids (React / Next.js)
+alwaysApply: false
+globs:
+  - "frontend/**/*.{ts,tsx}"
+  - "src/frontend/**/*.{ts,tsx}"
+---
+
+# 🎨 Frontend - Rules
+
+## ⚙️ Framework and Structure
+- Use **functional React components with hooks**; avoid class components.  
+- Style exclusively with **TailwindCSS** or **styled-components**; avoid global CSS.  
+- Use **Next.js App Router** for routing and SSR.  
+- Keep all reusable logic in custom hooks under `/hooks`.  
+- Organize frontend code as follows:
+frontend/
+components/
+hooks/
+contexts/
+pages/
+services/
+styles/
+utils/
+
+## 🌐 Language Context
+- Implement a global `LanguageContext` to switch between **English (en)** and **Spanish (es)**.  
+- This context must control:
+  - UI language.  
+  - Avatar session language (`AvatarSession.language`).  
+  - Speech transcription target.  
+
+### Example
+
+
+<AvatarSession language="es" onResult={handleResult} onError={handleError} />
+
+🧠 Avatar Interaction Rules
+
+All avatar conversation logic must be encapsulated inside AvatarSession.tsx.
+
+Avatar speech and subtitle sync should be handled via WebSocket or streaming API.
+
+Subtitles must appear synchronized with speech, clearly visible on both mobile and desktop.
+
+🧩 API Communication
+
+Never call backend endpoints directly from UI components.
+
+Delegate all API calls to:
+
+frontend/services/ for REST APIs.
+
+frontend/hooks/ for data fetching with React Query or SWR.
+
+Example pattern:
+
+import { useSpeechSession } from "@/hooks/useSpeechSession";
+
+🎧 AI and Streaming
+
+Handle AI streaming responses gracefully:
+
+Show loading animations while processing.
+
+Display partial transcriptions progressively.
+
+Provide a “replay” button for the final speech output.
+
+Always manage connection interruptions and timeout states.
+
+👶 Accessibility & UI
+
+The entire interface must be child-friendly:
+
+Use large buttons, soft colors, and rounded edges.
+
+Fonts must have high legibility (e.g., Poppins, Nunito).
+
+Include visual feedback on button press and hover states.
+
+All animations must be gentle, not flashing or disorienting.
+
+🧩 Internationalization (i18n)
+
+Use a shared i18n.json or equivalent translation system for static text.
+
+Store bilingual content (English/Spanish) and fallback to English if missing.
+
+Avatar and subtitle translations should match the current app language.
+
+🧪 Testing
+
+Include at least one E2E test covering the main user journey:
+register → avatar interaction → speech → feedback.
+
+Use Playwright or Cypress for E2E testing, and Jest + React Testing Library for unit tests.
+
+Example E2E test case:
+
+it("allows the user to start a speech session and get feedback", async () => {
+  await page.goto("/therapy");
+  await page.click("button#start-session");
+  await expect(page.locator(".subtitle")).toContainText("Hola");
+});
+🧩 Integration with Memory Bank
+
+Whenever major UI changes occur (new component, page, or flow):
+
+Cursor should suggest an update to:
+
+02-components.md (for new UI elements)
+
+05-progress-log.md (for visual or UX milestones)
+
+When a new avatar animation or UX pattern is added:
+
+Add documentation or screenshots in 03-development-process.md.
+
+🧩 Accessibility & QA
+
+Ensure WCAG 2.1 compliance for color contrast and text legibility.
+
+Test all UI flows in both English and Spanish modes.
+
+Validate layout on Chrome, Edge, Safari, and mobile browsers.
+
+🧱 Performance
+
+Optimize all assets and preload critical images for faster avatar loading.
+
+Lazy-load non-critical components (like feedback modals or animations).
+
+Use React Suspense for async rendering when supported.
+
+💬 Communication
+
+Inline comments should explain “why” — not “what” — for non-obvious UI logic.
+
+Keep design decisions synced with 07-decisions.md in the memory-bank.

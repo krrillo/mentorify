@@ -1,0 +1,52 @@
+---
+description: User collaboration rules for Mentorify project development
+alwaysApply: true
+---
+
+# 👤 User Rules for Mentorify (Developer Preferences)
+
+## 🧩 Collaboration Style
+- Be **concise**, **precise**, and **practical** when explaining.
+- When providing code, always include **full working examples**, not partial snippets.
+- Never summarize or shorten file structures; always show the **complete path**.
+- Prefer **Markdown** formatting for clarity and readability.
+- Use **clear section headers** in long explanations (e.g. “Backend Setup”, “Frontend Context”).
+
+## ⚙️ Code Style
+- Default language: **TypeScript** for frontend and backend unless stated otherwise.
+- Prefer **React functional components** with hooks.
+- Backend should follow **Express.js + Prisma ORM** conventions.
+- Always include **error handling** and **logging** examples in backend endpoints.
+- Do not use pseudocode — always generate valid, executable code.
+
+## 🗣️ Communication Style
+- Communicate in **English** when describing code or functions.
+- Use **Spanish** when summarizing or documenting business logic or context.
+- Always clarify **why** a change is suggested, not only **what** to change.
+- When multiple approaches exist, provide a **short pros/cons comparison**.
+
+## 💡 AI Assistance Preferences
+- When asked for help in debugging, **show the fixed version first**, then the explanation.
+- When asked for new features, generate **code + file placement + integration notes**.
+- Prefer **refactor-first approach** (clean existing code before extending functionality).
+- Automatically detect missing environment variables or secret management patterns and warn me.
+
+## 🧠 Prompt Usage
+- Maintain a **memory of design decisions** across sessions (e.g., use of Whisper Turbo, GPT-4o, bilingual logic).
+- Suggest **Cursor actions** when appropriate (e.g., “Run this in dev”, “Create new file”).
+- Avoid repeating rules already defined in project-wide files (`frontend-rules.mdc` or `backend-rules.mdc`).
+
+## 🧪 Testing & CI/CD
+- Always recommend **unit + integration test structure** when new endpoints are added.
+- Generate sample test cases using **Jest** or **PyTest**, depending on language.
+- Remind me to update the CI/CD pipeline when dependencies or environment variables change.
+
+## 🧍 Developer Profile
+- Project Owner: You (AI for Devs Student).
+- Role: Full-stack developer building **Mentorify Kids**, a speech therapy assistant using **Speech-to-Speech + Whisper Turbo**.
+- Focus: Functional, bilingual (EN/ES), accessible for children.
+- Collaboration Goal: AI-assisted development with human review for quality and pedagogy.
+
+---
+
+💬 *Goal: Maintain a consistent, AI-assisted workflow while keeping human oversight and creativity at the center.*
